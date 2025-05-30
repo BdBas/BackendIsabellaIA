@@ -115,6 +115,4 @@ app.get('/', (req, res) => {
   res.json({ message: 'API de Trivia funcionando' });
 });
 
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-}); 
+module.exports = app;
