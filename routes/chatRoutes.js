@@ -1,11 +1,13 @@
 import express from 'express';
-import { generateChatResponse, getConversationHistory } from '../controllers/chatController.js';
+import { getConversation, processMessage } from '../controllers/chatController.js';
+import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Ruta para generar respuestas de ChatGPT
-router.post('/', generateChatResponse);
-// Ruta para obtener el historial de conversaciones
-router.get('/history', getConversationHistory);
+// Ruta protegida para obtener la conversación del usuario
+router.get('/conversation', auth, getConversation);
 
-export { router };
+// Ruta protegida para procesar un nuevo mensaje
+router.post('/message', auth, processMessage);
+
+export default router;
